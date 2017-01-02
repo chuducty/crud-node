@@ -8,8 +8,6 @@ var multer = require('multer');
 var fs = require('fs');
 var port = process.env.PORT || 3000;
 
-
-
 var {mongoose} = require('./db/mongoose.js');
 var {User} = require('./models/user.js')
 var {Blog} = require('./models/blog.js')
@@ -127,7 +125,7 @@ app.post('/blogs/delete', (req, res) => {
       var img_path = 'public/img/'+blog.image
       fs.unlink(img_path, (err) => {
         if (err){
-          throw err;
+          res.redirect('/');
         }
 
       });
