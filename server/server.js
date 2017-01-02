@@ -126,6 +126,7 @@ app.post('/blogs/delete', (req, res) => {
       fs.unlink(img_path, (err) => {
         if (err){
           res.redirect('/');
+          return;
         }
 
       });
