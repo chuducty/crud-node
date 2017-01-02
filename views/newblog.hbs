@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Sign in Page</title>
+	<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+	<style>
+		body{
+			margin:50px;
+		}
+
+	</style>
+</head>
+<body>
+	<div class="container">
+			{{#if signinerr}}
+				<div style="color:red">
+					{{signinerr.text}}
+				</div>
+			{{/if}}
+      <form class="form-horizontal" method="post" action="/blogs/create" enctype="multipart/form-data">
+	        <fieldset>
+	        	<legend>New Blog</legend>
+
+	        	<div class="form-group">
+	        		<label for="title" class="control-label col-sm-3"><strong>Title:</strong></label>
+	        		<div class="col-sm-3">
+	        			<input type="text" name="title" id="title" value="{{#if signinerr}} {{signinerr.email}} {{/if}}" placeholder="Enter your email here:" class="form-control">
+	        		</div>
+	        	</div>
+	        	<div class="form-group">
+	        		<label for="text" class="control-label col-sm-3"><strong>Text:</strong></label>
+	        		<div class="col-sm-3">
+	        			<input type="text" name="text" id="text" placeholder="Enter your password here:" class="form-control">
+	        		</div>
+	        	</div>
+						<div class="form-group">
+	        		<label for="image" class="control-label col-sm-3"><strong>Text:</strong></label>
+	        		<div class="col-sm-3">
+	        			<input type="file" name="image">
+	        		</div>
+	        	</div>
+	        	<div class="form-group">
+	        		<div class="col-sm-offset-4 col-sm-2">
+	        			<button class="btn btn-primary btn-block">Submit</button>
+	        		</div>
+	        	</div>
+	        </fieldset>
+      </form>
+
+    </div>
+</body>
+</html>
