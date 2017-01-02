@@ -7,7 +7,9 @@
       <p>
         {{this.text}}
       </p>
-      <img src="img/{{this.image}}" />
+      {{#if this.image}}
+      <img src="img/{{this.image}}" width="280" height="280" />
+      {{/if}}
       <form method="post" action="/blogs/delete">
         <input name="id" id="id" type="hidden" value="{{this._id}}" />
         <button type="submit">Delete</button>

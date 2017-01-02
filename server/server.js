@@ -40,11 +40,13 @@ var sess;
 
 
 app.get('/signin', (req,res) => {
+
   var signinerr = req.session.signinerr;
   req.session.signinerr = null;
   res.render('signin.hbs', {signinerr});
 });
 app.post('/signin', (req,res) => {
+  
   //res.redirect('/');
   //console.log(req);
   sess = req.session;
@@ -121,14 +123,16 @@ app.post('/blogs/delete', (req, res) => {
   }
   Blog.findByIdAndRemove(id).then((blog) => {
     // var img_path = __dirname + '/./../public/img/'+blog.image
-    var img_path = 'public/img/'+blog.image
-    fs.unlink(img_path, (err) => {
-      if (err){
-        throw err;
-      }
-      res.redirect('/');
-    });
+    if (blog.image != "") {
+      var img_path = 'public/img/'+blog.image
+      fs.unlink(img_path, (err) => {
+        if (err){
+          throw err;
+        }
 
+      });
+    }
+    res.redirect('/');
   }).catch((e) => {
     res.send('ahuhu');
   });
@@ -196,7 +200,7 @@ app.post('/blogs/create', (req, res) => {
     // res.redirect('/');
     var text = req.body.text;
     var title = req.body.title;
-    var image = req.file.filename;
+    var image = req.file ? req.file.filename : "";
     User.findOne({email:req.session.email}).then((user) => {
       var blog = new Blog({
         text,
@@ -206,6 +210,7 @@ app.post('/blogs/create', (req, res) => {
       })
       blog.save()
     }).then((blog) => {
+      console.log(blog);
       res.redirect('/');
     }).catch((e) => {
       res.redirect('/blogs/create');
