@@ -46,7 +46,7 @@ app.get('/signin', (req,res) => {
   res.render('signin.hbs', {signinerr});
 });
 app.post('/signin', (req,res) => {
-  
+
   //res.redirect('/');
   //console.log(req);
   sess = req.session;
@@ -70,7 +70,7 @@ app.get('/logout', (req, res) => {
     if(err) {
       console.log(err);
     } else {
-      res.redirect('/');
+      res.redirect('/signin');
     }
   });
 });
